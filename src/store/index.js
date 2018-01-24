@@ -2,20 +2,18 @@ import Vue from 'vue'; // get vue
 import Vuex from 'vuex'; // get vuex
 import axios from 'axios';// get $http
 
+import vuexTestModule from "@/store/modules/VuexTestModule";
+
 Vue.use(Vuex);
 
 var state = {
   cardData: [],
   isloadingComplete: false,
   busy: false,
-  score: 0,
-  isShow: false,
+  isShow: false
 };
 
 var getters = {
-    scoreF({score}) {
-      return score + "分";
-    }
 };
 
 var mutations = {
@@ -33,29 +31,12 @@ var mutations = {
   },
   isShowAlert(state, data) {
     state.isShow = data;
-  },
-
-  // Vuex test
-  add(state, data) {
-
-    if(state.score >= 100) {
-      return;
-    }
-    var score = state.score + data;
-    state.score = score > 100 ? 100 : score;
-  },
-  reduce(state, data) {
-    if(state.score <= 0) {
-      return;
-    }
-
-    var score = state.score - data;
-    state.score = score < 0 ? 0 : score;
   }
 };
 
 var actions = {
   getData(context, object) {
+    console.log(context);
     var {progress, isRefresh} = object;
     progress.$Progress.start();
     context.commit('updateLoadingState', false);
@@ -79,22 +60,17 @@ var actions = {
       context.commit('updateBusyState', true);
       progress.$Progress.fail();
     });
-  },
-
-  // Vuex test
-  addA(context, object) {
-    setTimeout(function(){
-      context.commit("add", object);
-    }, 3000);
   }
-
 };
 
 var store = new Vuex.Store({
   state,
   getters,
   mutations,
-  actions
+  actions,
+  modules: {
+    vuexTestModule
+  }
 });
 
 export default store;

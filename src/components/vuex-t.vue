@@ -2,7 +2,7 @@
     <section>
         得分: {{score}} {{scoreF}}
         <br />
-        <button :disabled="score <= 0" @click="reduce(rd(1, 3))">-</button>&nbsp;&nbsp;<button :disabled="score >=100" @click="add(rd(1, 3))">+</button>&nbsp;&nbsp;<button :disabled="score >=100" @click="addA(rd(1, 3))">+</button>
+        <button :disabled="score <= 0" @click="reduce(rd(1, 3))">-</button>&nbsp;&nbsp;<button :disabled="score >=100" @click="add(rd(1, 3))">+</button>&nbsp;&nbsp;<button :disabled="score >=100" @click="testAdd()">+</button>
     </section>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     },
     computed:{
         ...mapState({
-            score: state => state.score
+            score: state => state.vuexTestModule.score
         }),
         ...mapGetters({
             scoreF: "scoreF"
@@ -31,6 +31,10 @@ export default {
         // reduce() {
         //     this.$store.commit("reduce", this.rd(1, 3));
         // }
+        testAdd(){
+            console.log(this.$store.state.scoreF);
+            this.addA(this.rd(1, 3));
+        },
         ...mapMutations({
             add: "add",
             reduce: "reduce"

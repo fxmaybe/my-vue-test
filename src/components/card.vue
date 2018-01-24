@@ -1,6 +1,8 @@
 <template>
   <div class="content easy-card-bg" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+    
     <div class="easy-card" v-for="res in results">
+      {{scoreF}}
       <img v-bind:src="res.img" alt="" />
       <p>{{res.content}}</p>
       <div class="easy-card-user-info">
@@ -25,7 +27,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapGetters} from 'vuex';
 
 export default {
   data() {
@@ -54,11 +56,16 @@ export default {
       this.fetchData(this);
     }
   },
-  computed: mapState({
-    results: state => state.cardData,
-    isloadingComplete: state => state.isloadingComplete,
-    busy: state => state.busy,
-  })
+  computed: {
+    ...mapState({
+      results: state => state.cardData,
+      isloadingComplete: state => state.isloadingComplete,
+      busy: state => state.busy,
+    }),
+    ...mapGetters({
+      scoreF: "scoreF" 
+    })
+  }
 }
 </script>
 
