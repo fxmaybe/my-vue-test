@@ -8,10 +8,15 @@ var state = {
   cardData: [],
   isloadingComplete: false,
   busy: false,
+  score: 0,
   isShow: false,
 };
 
-var getters = {};
+var getters = {
+    scoreF({score}) {
+      return score + "分";
+    }
+};
 
 var mutations = {
   updateLoadingState(state, data) {
@@ -29,6 +34,24 @@ var mutations = {
   isShowAlert(state, data) {
     state.isShow = data;
   },
+
+  // Vuex test
+  add(state, data) {
+
+    if(state.score >= 100) {
+      return;
+    }
+    var score = state.score + data;
+    state.score = score > 100 ? 100 : score;
+  },
+  reduce(state, data) {
+    if(state.score <= 0) {
+      return;
+    }
+
+    var score = state.score - data;
+    state.score = score < 0 ? 0 : score;
+  }
 };
 
 var actions = {
@@ -56,7 +79,14 @@ var actions = {
       context.commit('updateBusyState', true);
       progress.$Progress.fail();
     });
-}
+  },
+
+  // Vuex test
+  addA(context, object) {
+    setTimeout(function(){
+      context.commit("add", object);
+    }, 3000);
+  }
 
 };
 

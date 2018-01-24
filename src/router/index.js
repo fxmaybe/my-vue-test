@@ -9,6 +9,7 @@ import Todos from '../views/todos.vue';
 import Todos2 from '../views/todos2.vue';
 import Todos3 from '../views/todos3.vue';
 import Todosx from '../views/todosx.vue';
+import VuexTest from '../views/vuex-test.vue';
 
 Vue.use(VueRouter);
 
@@ -20,7 +21,8 @@ const routes = [
   { path: '/todos', component: Todos },
   { path: '/todos2', component: Todos2 },
   { path: '/todos3', component: Todos3 },
-  { path: '/todosx', component: Todosx }
+  { path: '/todosx', component: Todosx },
+  { path: '/vuextest', component: VuexTest }
 ];
 
 const router = new VueRouter({routes});
