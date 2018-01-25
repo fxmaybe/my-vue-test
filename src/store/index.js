@@ -1,8 +1,9 @@
 import Vue from 'vue'; // get vue
 import Vuex from 'vuex'; // get vuex
-import axios from 'axios';// get $http
-
+import Axios from 'axios';
+import common from "@/store/modules/common";
 import vuexTestModule from "@/store/modules/VuexTestModule";
+import vuexTestModuleNs from "@/store/modules/VuexTestModuleNs";
 
 Vue.use(Vuex);
 
@@ -46,7 +47,8 @@ var actions = {
      * use axios
      */
 
-    axios.get('/mock/api.json').then((response) => {
+    console.log(this);
+    Axios.get('/mock/api.json').then((response) => {
       var json = response.data;
       context.commit('updateLoadingState', true);
       context.commit('updateBusyState', false);
@@ -69,7 +71,9 @@ var store = new Vuex.Store({
   mutations,
   actions,
   modules: {
-    vuexTestModule
+    common,
+    vuexTestModule,
+    vuexTestModuleNs
   }
 });
 

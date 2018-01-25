@@ -4,6 +4,7 @@ import 'animate.css/animate.css'; // get animate.css
 
 // import FastClick from 'fastclick';
 import Vue from 'vue'; // get vue
+import Axios from 'axios';
 import VueProgressBar from 'vue-progressbar'; // get vue-progressbar
 import InfiniteScroll from 'vue-infinite-scroll'; // get vue-infinite-scroll
 
@@ -25,6 +26,9 @@ var options = {
   location: 'top',
   inverse: false
 };
+
+Vue.prototype.$ajax = Axios;
+
 Vue.use(VueProgressBar, options);
 Vue.use(InfiniteScroll);
 Vue.use(Utils);

@@ -1,5 +1,4 @@
 export default {
-  namespaced: true,
   state: {
     score: 0
   },

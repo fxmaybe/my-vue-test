@@ -3,6 +3,11 @@
         得分: {{score}} {{scoreF}}
         <br />
         <button :disabled="score <= 0" @click="reduce(rd(1, 3))">-</button>&nbsp;&nbsp;<button :disabled="score >=100" @click="add(rd(1, 3))">+</button>&nbsp;&nbsp;<button :disabled="score >=100" @click="testAdd()">+</button>
+        <br />
+        <br />
+        {{msg}}
+        <br />
+        <button @click="changeMsg()">立即改变msg</button>&nbsp;&nbsp;<button @click="changeMsgAct()">3秒后改变msg</button>
     </section>
 </template>
 
@@ -17,7 +22,8 @@ export default {
     },
     computed:{
         ...mapState({
-            score: state => state.vuexTestModule.score
+            score: state => state.vuexTestModule.score,
+            msg: state => state.common.msg
         }),
         ...mapGetters({
             scoreF: "scoreF"
@@ -33,14 +39,16 @@ export default {
         // }
         testAdd(){
             console.log(this.$store.state.scoreF);
-            this.addA(this.rd(1, 3));
+            this.addAct(this.rd(1, 3));
         },
         ...mapMutations({
             add: "add",
-            reduce: "reduce"
+            reduce: "reduce",
+            changeMsg: "changeMsg"
         }),
         ...mapActions({
-            addA: "addA"
+            addAct: "addAct",
+            changeMsgAct: "changeMsgAct"
         })
     }
 };
